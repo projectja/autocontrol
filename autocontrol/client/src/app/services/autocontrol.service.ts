@@ -17,7 +17,8 @@ export class AutocontrolService {
   API_URI = 'http://localhost:3000/api';
 
 // COMUNICACION ENTRE COMPONENTES SIBILINGS
-private subject = new Subject<any>();
+//private subject = new Subject<any>();
+// https://stackblitz.com/edit/angular-shared-service?file=app%2Fcommon%2Fshared.service.ts
 
 comp1Val: string;
 _comp1ValueBS = new BehaviorSubject<string>('');
