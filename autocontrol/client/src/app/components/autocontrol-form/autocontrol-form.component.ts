@@ -213,11 +213,14 @@ export class AutocontrolFormComponent implements OnInit {
     )}
 
 
+
+
   // Row clicked JESUS
   onRowClicked(row: any, event: MouseEvent): void {
     
-
-    this.addValue(this.sharedService.comp1Val)
+     // function que llamará quien quiera transmitir un mensaje.
+    this.autocontrolservice.enviar(row);
+   // this.addValue(this.sharedService.comp1Val)
       this.autocontrolservice.editTarea(row.id).subscribe(
         res => {
           this.tareasrealizadas = res;

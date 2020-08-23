@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient }from '@angular/common/http';
 import { BehaviorSubject } from "rxjs";
+import { take } from 'rxjs/operators';
 
 // con esta interface importada, se puede enviar el envio del uego por saveGame
 import { Empleados } from '../models/empleados';
@@ -28,37 +29,27 @@ comp2Val: string;
 _comp2ValueBS = new BehaviorSubject<string>('');
 
 
+// Es una buena practica definirlo asi
+// https://medium.com/angular-chile/comunicaci%C3%B3n-entre-componentes-explicado-con-dragon-ball-z-angular-7-parte-2-5403ec132718
+bulma$ = this._comp1ValueBS.asObservable(); 
+
+
+
 // END COMUNICACION ENTRE COMPONENTES SIBILINGS
 
   constructor( private http: HttpClient ) { 
 
     // comunicacion sibilings
 
-    this.comp1Val;
-    this.comp2Val;
+    //this.comp1Val;
+    //this.comp2Val;
+   
 
-    this._comp1ValueBS.next(this.comp1Val);
-    this._comp2ValueBS.next(this.comp2Val);
+    //this._comp1ValueBS.next(this.comp1Val);
+    //this._comp2ValueBS.next(this.comp2Val);
+
   }
-  // comunicacion sibilings
-
-  // actualiza el valor cuando mandan una actualizacion desde el
-  // componente autocontrol. lo que seria un cick en el grid
-
-  updateComp1Val(val) {
-    this.comp1Val = val;
-    this._comp1ValueBS.next(this.comp1Val);
-  }
-  
-  // actualiza el valor cuando mandan una actualizacion desde el
-  // componente autocontrol. lo que seria un cick en el grid
-  // END
-
-
-  updateComp2Val(val) {
-    this.comp2Val = val;
-    this._comp2ValueBS.next(this.comp2Val);
-  }
+ 
 
 
   getEmpleados() {
@@ -112,9 +103,38 @@ _comp2ValueBS = new BehaviorSubject<string>('');
 
   editTarea(idtask: any){   
     console.log('tarea ',idtask)
+    
     return this.http.get(`${this.API_URI}/tareas/editarea/${idtask}`);
       
   }
+
+  
+  updateComp1Val(val) {
+    this.comp1Val = val;
+    this._comp1ValueBS.next(this.comp1Val);
+    this.bulma$.pipe(take(1))
+ 
+  }
+  
+  // actualiza el valor cuando mandan una actualizacion desde el
+  // componente autocontrol. lo que seria un cick en el grid
+  // END
+
+
+  updateComp2Val(val) {
+    this.comp2Val = val;
+    this._comp2ValueBS.next(this.comp2Val);
+  }
+
+  enviar(mensaje) {
+    // function que llamará quien quiera transmitir un mensaje.
+    console.log ( " this._comp1ValueBS.next(mensaje) ", mensaje)
+    this._comp1ValueBS.next(mensaje);
+    console.log ("despues del mensaje anterior ")
+  }
+
+
+ 
 
  
 

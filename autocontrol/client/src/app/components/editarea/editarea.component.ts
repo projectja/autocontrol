@@ -11,6 +11,7 @@ import {ActivatedRoute} from '@angular/router';
 import {Input} from '@angular/core'
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { Subscription } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 
 
@@ -25,6 +26,9 @@ export class EditareaComponent implements OnInit {
   
   comp1Val: string;
   comp2Val: string;
+
+  mensajecadena:any
+
 
   @Input() childMessage: string;
   message$: any;
@@ -45,26 +49,24 @@ export class EditareaComponent implements OnInit {
    dataSource: any;
    displayedColumns: string[] = ['fecha', 'nombre', 'zona', 'parte', 'finalizada'];
 
-
+  
 // fin prueba para error
 
   constructor( private route:Router,private fb: FormBuilder,
               private activeroute:ActivatedRoute,
                private validadores: ValidadoresService, private autocontrolservice: AutocontrolService,
                private sharedService: AutocontrolService) { 
-  
-               
-    
-   
+              
     
 
+    //this.cargardataAlFormularioEdit();
+    this.verMensaje(); 
     this.crearFormulario();
-    this.cargarDataAlFormulario();
+   
+     
    
     // this.crearListeners();
-
  
-
   }
 
   ngAfterContentChecked() {
@@ -74,9 +76,10 @@ export class EditareaComponent implements OnInit {
   tareaid:number    ;
   ngOnInit() {
 
+    
     this.getEmpleados();
     this.cargarZonas();
-  
+    //this.cargarDataAlFormulario();
     // esta variacion con  respecto al crar la tarea
     // aqui tenemos que ser capaces de mostrar la tarea
     // que ya existía en el registro
@@ -86,21 +89,20 @@ export class EditareaComponent implements OnInit {
 
   }
 
-
   crearFormulario() {
     this.forma = this.fb.group({
   //  this.forma = this.fb.group({
-      fecha_tarea: 9,
-      id_empleado     : 0,
+  
+      fecha_tarea: 0,
+      id_empleado     :   new FormControl({ value: this.mensajecadena.id,
       id_zona    : 0,
       id_elementozona: 0,
       nota: [''],
       finalizada: false
     }); 
-    console.log (' child message '+ this.childMessage)
+    console.log (' crearFORMULARIO '+ this.mensajecadena.id)
 
   }
-
 
   crearListeners() {
    // this.forma.get('id_empleado').valueChanges.subscribe( console.log );
@@ -108,14 +110,17 @@ export class EditareaComponent implements OnInit {
 
   cargarDataAlFormulario() {
 
-    //this.forma.setValue({
-    this.forma.reset({
+    this.forma.setValue({
+    //this.forma.reset({
       id_empleado     : 0,
+      fecha_tarea: '12/05/2020',
       id_zona    : 0,
       nota: [''],
       id_elementozona: 0,      
       finalizada: false
+     
     });
+        this.forma.valueChanges.subscribe(console.log);
 
   }
 
@@ -123,7 +128,7 @@ export class EditareaComponent implements OnInit {
 
     //this.forma.setValue({
     this.forma.reset({
-      id_empleado     : 0, 
+      id_empleado     :0, 
       id_zona    : 0,
       nota: [''],
       id_elementozona: 0,      
@@ -222,8 +227,19 @@ export class EditareaComponent implements OnInit {
       err => console.error("dea error", err)           
     )}
 
-
     // Row clicked JESUS
+
+    verMensaje() {
+       // take es un operador que hará que solo obtengamos el último valor
+      // que tiene bulma$ almacenado. Si no lo usamos, cuando enviemos un mensaje
+      // de cualquiera de los dos componentes, se mostrará automaticamente
+      // en el que ya haya visto un mensaje anteriormente.
+      this.autocontrolservice.bulma$.pipe(take(1)).
+      subscribe(mensaje => this.mensajecadena = mensaje);
+
+      console.log("mensajecadena ",this.mensajecadena)
+
+    }
    
 
     }

@@ -17,13 +17,12 @@
     <label class="col-2 col-form-label">Nombre</label>
     <div class="col">
         <select class="form-control" 
-
                 placeholder="Nombre"  
-                formControlName="id_empleado">
-                <option  id="nombre"   
-                
+                formControlName="id_empleado"     >
+                <option  id="nombre"                   
                 [value] = "empleado.id"
-                *ngFor = "let empleado of empleados" [value]=empleado.id>{{empleado.nombre}}</option>
+                *ngFor = "let empleado of empleados"
+                  >{{empleado.nombre}}</option>
         </select>
          
       </div>
@@ -90,6 +89,7 @@
   {{forma.value | json }}
  
   <pre><b>Component1:</b> {{comp1Val}}</pre>
+  <pre><b>Component1:</b> {{mensajecadena| json}}</pre>
 </pre>
 
 
