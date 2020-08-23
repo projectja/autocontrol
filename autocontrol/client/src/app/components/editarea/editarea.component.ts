@@ -94,7 +94,7 @@ export class EditareaComponent implements OnInit {
   //  this.forma = this.fb.group({
   
       fecha_tarea: 0,
-      id_empleado     :   new FormControl({ value: this.mensajecadena.id,
+      id_empleado     : 0,
       id_zona    : 0,
       id_elementozona: 0,
       nota: [''],
