@@ -88,10 +88,17 @@ bulma$ = this._comp1ValueBS.asObservable();
     return this.http.get(`${this.API_URI}/elementosporzona/${id}`);
   }
 
-  saveTarea(tareas: any) {
-    console.log("SAVE TAREA  " , tareas);
+  saveTarea(id:any,tarea: any) {
+    console.log("SAVE TAREA  " , tarea);
     
-    return this.http.post(`${this.API_URI}/tareas`, tareas);
+    return this.http.put(`${this.API_URI}/tareas/editarea/${id}`, tarea);
+
+  }
+
+  saveTareaNew(tarea: any) {
+    console.log("SAVE TAREA NEW " , tarea);
+    
+    return this.http.post(`${this.API_URI}/tareas/`, tarea);
 
   }
 

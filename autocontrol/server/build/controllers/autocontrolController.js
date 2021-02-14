@@ -114,6 +114,16 @@ class AutocontrolController {
             res.json({ text: ' creating a una tarea ' });
         });
     }
+    updateTarea(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            // ESTE METODO SE CREA para atender a la repsuesta del archivo
+            // indexRoute cuando el cliente llama desde el navegador a la ruta / pero a 
+            // traves del metodo POST (ver archivo gameRoutes.ts)
+            const { id } = req.params;
+            database_1.default.query('UPDATE tareas_limpiezaylotes set ? WHERE id = ?', [req.body, id]);
+            res.json({ text: ' tarea update ' });
+        });
+    }
     tareaslista(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;

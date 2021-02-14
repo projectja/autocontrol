@@ -2,7 +2,7 @@
 
 <h4>Formularios <small> Reactivos </small></h4>
 <hr>
-<form autocomplete="off" [formGroup]="forma" (ngSubmit)="guardar()">
+<form autocomplete="off" [formGroup]="forma" > <!-- (ngSubmit)="guardar() -->
   <div class="form-group row">
     <label class="col-2 col-form-label">Fecha</label>
     <div class="col example-full-width">
@@ -63,7 +63,7 @@
   <div class="form-group row">
     <label class="col-2 col-form-label">&nbsp;</label>
     <div class="input-group col">
-      <button type="submit" class="btn btn-outline-primary btn-block">
+      <button type="submit" [disabled]="forma.invalid" (click)="guardar()" class="btn btn-outline-primary btn-block">
         Guardar
       </button>
     </div>
@@ -74,20 +74,23 @@
 <!-- Tabla Angular material -->
 <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-   <!-- id Column -->
-   <ng-container matColumnDef="id">
+  
+  <!-- id Column -->
+  <ng-container matColumnDef="id">
     <mat-header-cell *matHeaderCellDef>id</mat-header-cell>
+    <mat-cell *matCellDef="let element"> 
+      {{element?.id}} </mat-cell>
+  </ng-container>
+
+   <!-- fecha Column -->
+   <ng-container matColumnDef="fecha">
+    <mat-header-cell *matHeaderCellDef>fecha</mat-header-cell>
     <mat-cell *matCellDef="let element" > 
       {{element?.fecha_tarea | date: 'dd/MM/yyyy'}}      
    </mat-cell>
       
   </ng-container>  
 
-  <!-- Fecha Column -->
-  <ng-container matColumnDef="fecha">
-    <mat-header-cell *matHeaderCellDef>Fecha</mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element?.id}} </mat-cell>
-  </ng-container>
 
   <!-- Nombre Column -->
   <ng-container matColumnDef="nombre">
@@ -112,7 +115,7 @@
     <mat-header-cell *matHeaderCellDef>Finalizada</mat-header-cell>
     <mat-cell *matCellDef="let element"> {{element.finalizada ? 'Sí' : 'No'}} </mat-cell>
   </ng-container>
-
+<!-- HACEMOS DOBLE CLICK -->
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
   <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onRowClicked(row, $event)"></mat-row>
 </mat-table>

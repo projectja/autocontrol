@@ -106,6 +106,16 @@ public async tareacreate(req: Request, res: Response): Promise<void>{
     res.json({text: ' creating a una tarea '})
 }
 
+public async updateTarea(req: Request, res: Response): Promise<void>{
+    // ESTE METODO SE CREA para atender a la repsuesta del archivo
+    // indexRoute cuando el cliente llama desde el navegador a la ruta / pero a 
+    // traves del metodo POST (ver archivo gameRoutes.ts)
+    const { id } = req.params;
+    
+    pool.query('UPDATE tareas_limpiezaylotes set ? WHERE id = ?', [req.body, id]);
+    res.json({text: ' tarea update '})
+}
+
 
 public async tareaslista (req: Request, res: Response) {
     const { id } = req.params;

@@ -44,7 +44,7 @@ export class AutocontrolFormComponent implements OnInit {
 
    // Data table
    dataSource: any;
-   displayedColumns: string[] = ['fecha', 'nombre', 'zona', 'parte', 'finalizada'];
+   displayedColumns: string[] = ['id', 'fecha', 'nombre', 'zona', 'parte', 'finalizada'];
 
 
 // fin prueba para error
@@ -122,7 +122,7 @@ export class AutocontrolFormComponent implements OnInit {
   }
 
   guardar() {
-    console.log(  "VALOR DE FORMA EN GUARDAR() " ,this.forma );                                                                                                                                         
+    console.log(  "VALOR 232 DE FORMA EN GUARDAR() " ,this.forma );                                                                                                                                         
          
     if ( this.forma.invalid ) {
 
@@ -141,7 +141,7 @@ export class AutocontrolFormComponent implements OnInit {
     }
     this.tareaencurso = JSON.parse(JSON.stringify(this.forma.value))
    
-    this.autocontrolservice.saveTarea(this.tareaencurso).subscribe(
+    this.autocontrolservice.saveTareaNew(this.tareaencurso).subscribe(
       res => {
         //this.empleados = res;
         console.log("ESTSOS SON LOS EMPLEADOS: ", res )

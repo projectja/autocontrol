@@ -16,7 +16,7 @@ class AutocontrolRoutes {
         // cuando toma la ruta '/' y cuando visienten la ruta / se procesa indexcontroller.index
         console.log('en elementoszonaroutes.ts ');
         this.router.get('/:id', autocontrolController_1.default.elementoszonaporzona);
-        this.router.post('/', autocontrolController_1.default.tareacreate);
+        //this.router.post('/', autocontrolController.tareacreate );
         // solor obtener una rruta
         //this.router.get('/:id', autocontrolController.elementoszonagetone );
         // la ruta es la misma pero a traves del metodo POST:

@@ -17,7 +17,8 @@ class TareasRoutes {
     
         
         this.router.post('/', autocontrolController.tareacreate );
-        this.router.get('/', autocontrolController.tareaslista ); 
+        this.router.get('/', autocontrolController.tareaslista );
+        this.router.put('/editarea/:id', autocontrolController.updateTarea);
         console.log (' antes !!!!  ')
         this.router.get('/editarea/:id', autocontrolController.editTarea ); 
         // solor obtener una rruta
@@ -25,7 +26,7 @@ class TareasRoutes {
         // la ruta es la misma pero a traves del metodo POST:
         //this.router.post('/', autocontrolController.elementoszonacreate );
         //this.router.delete('/:id', autocontrolController.elementoszonadelete);
-        //this.router.put('/:id', autocontrolController.elementoszonaupdate);
+        // this.router.post('tareas/:id', autocontrolController.elementoszonaupdate);
     }
 }
 
