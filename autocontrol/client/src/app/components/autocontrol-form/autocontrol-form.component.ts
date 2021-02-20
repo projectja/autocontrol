@@ -40,6 +40,7 @@ export class AutocontrolFormComponent implements OnInit {
   tareasrealizadas: any = [];
   gridOptions: GridOptions;
   comp1Val:string;
+  router:Router;
 
 
    // Data table
@@ -209,8 +210,12 @@ export class AutocontrolFormComponent implements OnInit {
 
         this.dataSource = res
       },
-      err => console.error("dea error", err)           
-    )}
+      err => console.error("dea error", err))         
+  
+    
+  }
+
+    
 
 
 

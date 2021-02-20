@@ -45,6 +45,7 @@ export class EditareaComponent implements OnInit {
   tareasrealizadas: any = [];
   gridOptions: GridOptions;
   tareaid:number;
+  router:  Router
 
 
    // Data table
@@ -125,7 +126,10 @@ export class EditareaComponent implements OnInit {
         
       },
       err => console.error(err)
+      
     )
+    this.route.navigate(['/autocontrol']);
+    
 
     // Posteo de información
     this.forma.reset({
@@ -138,7 +142,6 @@ export class EditareaComponent implements OnInit {
   save_tarea_modificada() {
     console.log(  "VALOR DE FORMA EN GUARDAR() " ,this.forma );                                                                                                                                         
      
-
     this.tareaencurso = JSON.parse(JSON.stringify(this.forma.value))
    
     this.autocontrolservice.saveTarea(this.tarea.id, this.tareaencurso).subscribe(
@@ -149,8 +152,10 @@ export class EditareaComponent implements OnInit {
         
       },
 
-      err => console.error(err)
-    )
+      err => console.error("ddddw",err));
+      this.route.navigate(['/autocontrol']);
+
+  
 
     // Posteo de información
     this.forma.reset({
@@ -245,8 +250,11 @@ export class EditareaComponent implements OnInit {
 
         this.dataSource = res
       },
-      err => console.error("dea error", err)           
-    )}
+      err => console.error("dea error", err)       
+
+    
+    )
+  }
 
     // Row clicked JESUS
 
