@@ -1,0 +1,97 @@
+<h4>Edita datos una tarea- Formularios <small> Reactivos </small></h4>
+<hr>
+<form autocomplete="off" [formGroup]="forma" (ngSubmit)="guardar()">
+
+
+  <div class="form-group row">
+    <label class="col-2 col-form-label">Fecha</label>
+    <div class="col example-full-width">
+        <input matInput [matDatepicker]="picker" class="form-control" placeholder="Fecha"  formControlName="fecha_tarea">
+        <mat-datepicker #picker></mat-datepicker>
+        <button mat-raised-button (click)="picker.open()">Open</button>       
+    </div>
+  </div>
+
+ 
+  <div class="form-group row">
+    <label class="col-2 col-form-label">Nombre</label>
+    <div class="col">
+        <select class="form-control" 
+
+                placeholder="Nombre"  
+                formControlName="id_empleado">
+                <option  id="nombre"   
+                
+                [value] = "empleado.id"
+                *ngFor = "let empleado of empleados" [value]=empleado.id>{{empleado.nombre}}</option>
+        </select>
+         
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-2 col-form-label">Zona de la tienda</label>
+      <div class="col">
+        <select (change)="cargarElementosZona($event.target.value)" 
+                class="form-control" 
+                placeholder="Zona"  
+                formControlName="id_zona">                
+               <option  *ngFor = "let zona of zonasTienda" [value]=zona.id>{{zona.nombre}}</option>
+        </select>         
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-2 col-form-label">Qué parte concretamente</label>
+      <div class="col">
+        <select  class="form-control" 
+                 placeholder="Zona"  
+                 formControlName="id_elementozona">
+                <option  *ngFor = "let elemento of elementosZona" [value]=elemento.id>{{elemento.description_obj}}</option>
+        </select>         
+      </div>
+    </div>
+
+
+    <div class="form-group row align-items-end">
+      <label class="col-2 col-form-label" value="">Finalizada</label>
+      <div class="col">
+       <label><input type="checkbox" value="" formControlName="finalizada"></label>
+      </div>                                        
+     </div>
+
+
+
+  <div class="form-group row">
+    <label class="col-2 col-form-label">&nbsp;</label>
+    <div class="input-group col">
+      <button type="submit" class="btn btn-outline-primary btn-block">
+        Guardar
+      </button>
+    </div>
+  </div>  
+
+  
+  <div *ngIf="message$" class="alert alert-success">
+ 
+    {{ message$.text }}
+    </div>
+
+
+
+</form>
+
+<br>
+<pre>
+  Estado del hijo  {{forma.valid}}  
+</pre>
+
+<pre>
+  {{forma.value | json }}
+ 
+  <pre><b>Component1:</b> {{comp1Val}}</pre>
+</pre>
+
+
+
+
